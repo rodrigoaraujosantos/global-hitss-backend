@@ -1,0 +1,22 @@
+{
+  "name": "fabrica-backend",
+  "version": "1.0.0",
+  "description": "Este é um projeto de teste para a Global Hitss.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon /src/index.js"
+  },
+  "keywords": [
+    "node",
+    "backend",
+    "desenvolvimento."
+  ],
+  "author": "Rodrigo Araujo Santos",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

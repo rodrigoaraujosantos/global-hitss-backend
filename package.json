@@ -4,7 +4,7 @@
   "description": "Este é um projeto de teste para a Global Hitss.",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon /src/index.js"
+    "dev": "nodemon ./src/index.js"
   },
   "keywords": [
     "node",
@@ -14,7 +14,10 @@
   "author": "Rodrigo Araujo Santos",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

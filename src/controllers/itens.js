@@ -32,7 +32,10 @@ const cadastrarItem = async (req, res) => {
 
 const obterItens = async (req, res) => {
   try {
-    const itens = await knex('item');
+    // const itens = await knex('item');
+    const itens = await knex('item as i')
+      .select('i.id', 'i.nome', 'i.quantidade', 'l.nome as nome_lista')
+      .innerJoin('listas as l', 'i.id_lista', 'l.id');
 
     return res.status(200).json(itens)
   } catch (error) {

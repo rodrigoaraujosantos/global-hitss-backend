@@ -25,6 +25,7 @@ const criarLista = async (req, res) => {
 };
 
 const obterListas = async (req, res) => {
+  
   const listas = await knex('listas');
   console.log(listas);
   try {
@@ -35,6 +36,7 @@ const obterListas = async (req, res) => {
 };
 
 const atualizarLista = async (req, res) => {
+  console.log('atualizar lista front');
   const { id } = req.params;
   const { nome } = req.body;
   

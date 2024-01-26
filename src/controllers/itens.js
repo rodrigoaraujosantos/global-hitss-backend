@@ -2,10 +2,24 @@ const knex = require('../conexao');
 
 const cadastrarItem = async (req, res) => {
   const { nome, quantidade, id_lista } = req.body;
+
+  console.log(nome, quantidade, id_lista);
   
-  if (!nome || !quantidade || !id_lista){
-    return res.status(400).json({mensagem: "Os campos 'Nome', 'quantidade' e 'id_lista' são obrigatorios."})
+  if (!nome ){
+    return res.status(400).json({mensagem: "O campo'nome' é obrigatório."})
   };
+
+  if (!quantidade ){
+    return res.status(400).json({mensagem: "O campo 'quantidade' é obrigatório."})
+  };
+
+  if (id_lista === undefined || id_lista === null || id_lista === "") {
+    return res.status(400).json({mensagem: "O campo 'id_lista' é obrigatório."});
+  }
+
+  // if (!id_lista ){
+  //   return res.status(400).json({mensagem: "O campo 'id_lista' é obrigatório."})
+  // };
 
   const listaValida = await knex('listas').where({id: id_lista}).first();
 
@@ -18,6 +32,7 @@ const cadastrarItem = async (req, res) => {
     const itemExistente = await knex('item').where({nome, id_lista}).first();
 
     if (itemExistente) {
+      
       const atualizaQuantidade = await knex('item').where({id: itemExistente.id}).increment({quantidade: quantidade})
     } else {
       const novoItem = await knex('item').insert({nome, quantidade, id_lista});

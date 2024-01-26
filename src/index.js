@@ -1,22 +1,37 @@
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors')
-
-const knex = require('./conexao');
-
-const rota = require('./routers/rotas');
+const cors = require('cors');
+const router = require('./routers/rotas');
 
 const app = express();
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// Configuração do CORS
+const corsOptions = {
+  origin: 'http://localhost:3001',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+};
+app.use(cors(corsOptions));
 
+// Middleware para parsing de JSON
 app.use(express.json());
 
-app.use(rota);
+// Rotas
+app.use(router);
 
-app.listen(process.env.PORT);
+// Middleware para tratamento de rota desconhecida
+app.use((req, res) => {
+  res.status(404).json({ mensagem: 'Rota não encontrada' });
+});
 
+// Middleware para tratamento de erros
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ mensagem: 'Erro interno do servidor' });
+});
+
+// Inicialização do servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado na porta ${PORT}`);
+});

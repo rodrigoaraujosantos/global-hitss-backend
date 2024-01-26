@@ -1,17 +1,19 @@
 const express = require('express');
-const { criarLista, obterListas, atualizarLista, excluirLista } = require('../controllers/listas');
-const { cadastrarItem, obterItens, atualizarItem, excluirItem } = require('../controllers/itens');
+const listaController = require('../controllers/listas');
+const itemController = require('../controllers/itens');
 
-const rota = express.Router();
+const router = express.Router();
 
-rota.post('/lista', criarLista);
-rota.get('/lista', obterListas);
-rota.put('/lista/:id', atualizarLista);
-rota.delete('/lista/:id', excluirLista);
+// Rotas para listas
+router.post('/listas', listaController.criarLista);
+router.get('/listas', listaController.obterListas);
+router.put('/listas/:id', listaController.atualizarLista);
+router.delete('/listas/:id', listaController.excluirLista);
 
-rota.post('/item', cadastrarItem);
-rota.get('/item', obterItens);
-rota.put('/item/:id', atualizarItem);
-rota.delete('/item/:id', excluirItem);
+// Rotas para itens
+router.post('/itens', itemController.criarItem);
+router.get('/itens', itemController.obterItens);
+router.put('/itens/:id', itemController.atualizarItem);
+router.delete('/itens/:id', itemController.excluirItem);
 
-module.exports = rota;
+module.exports = router;

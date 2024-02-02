@@ -7,6 +7,7 @@ const router = express.Router();
 // Rotas para listas
 router.post('/listas', listaController.criarLista);
 router.get('/listas', listaController.obterListas);
+router.get('/listas/:id', listaController.obterListaPorId);
 router.put('/listas/:id', listaController.atualizarLista);
 router.delete('/listas/:id', listaController.excluirLista);
 

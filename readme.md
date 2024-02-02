@@ -32,7 +32,7 @@ Criado repositório no 'Github' para controle de versão e armazenamento do proj
 
 Criação de um novo projeto com 'React'
 
-Instalação das bibliotécas ('axios', 'json-server', 'react-dom', 'react-icons', 'react-router-dom', 'react-scripts', 'web-vitals').
+Instalação das bibliotécas ('axios', 'json-server', 'react-dom', 'react-icons', 'react-router-dom', 'react-scripts', 'web-vitals' e 'joi').
 
 Estruturação de pastas do projeto, a base do 'React' é a componentização, todos os componentes podem ser reutilizados quando necessário.
 

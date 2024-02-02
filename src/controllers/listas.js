@@ -35,6 +35,22 @@ const obterListas = async (req, res) => {
   }
 };
 
+const obterListaPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const lista = await knex('listas').where({ id }).first();
+
+    if (!lista) {
+      return res.status(404).json({ mensagem: 'Lista não encontrada' });
+    }
+
+    return res.status(200).json(lista);
+  } catch (error) {
+    return res.status(500).json({ mensagem: 'Erro interno do servidor', error: error.message });
+  }
+};
+
 const atualizarLista = async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,9 +71,9 @@ const atualizarLista = async (req, res) => {
       return res.status(400).json({ mensagem: "O nome informado já existe" });
     }
 
-    await knex('listas').update({ nome }).where({ id });
+    await knex('listas').update({ nome }).where({ id }).returning('*');
 
-    return res.status(201).json({ mensagem: "Lista atualizada com sucesso" });
+    return res.status(201).json({ mensagem: "Lista atualizada com sucesso(backend)" });
   } catch (error) {
     return res.status(500).json({ mensagem: "Erro interno do servidor", error: error.message });
   }
@@ -84,5 +100,6 @@ module.exports = {
   criarLista,
   obterListas,
   atualizarLista,
-  excluirLista
+  excluirLista,
+  obterListaPorId
 };
